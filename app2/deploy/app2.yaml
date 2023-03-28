@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-app2
+  labels:
+    name: laravel-app2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: laravel-app2
+  template:
+    metadata:
+      name: laravel-app2
+      labels:
+        app: laravel-app2
+    spec:
+      containers:
+        - name: laravel-app2
+          image: akib123/laravel-app2:v1.0
+          imagePullPolicy: Always
+      nodeSelector:
+        app: app2
+     
+

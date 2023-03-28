@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    stages{
+
+
+stage('Build Image and Push') {
+
+    steps{
+     script{
+        withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
+        docker.build("akib123/laravel-app2:v1.0","-f ./app2/build/Dockerfile ./app2/src/").push()
+        }
+    }
+           
+    }
+} 
+
+ stage('Deploy') {
+           
+            steps{
+                 
+               sshagent(credentials: ['illusion']) {
+               withCredentials([string(credentialsId: 'USER@KubeServer', variable: 'userAtIP')]) {
+
+                sh 'scp ./app2/deploy/app2.yaml ./app2/deploy/service.yaml   ${userAtIP}: '
+                sh 'ssh ${userAtIP} "minikube kubectl -- apply -f app2.yaml"'
+                sh 'ssh ${userAtIP} "minikube kubectl -- apply -f service.yaml"'
+                sh 'ssh ${userAtIP} "rm ./app2.yaml ./service.yaml"'
+}
+               
+               
+
+    }
+            }
+    } 
+} 
+}
+
+

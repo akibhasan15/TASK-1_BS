@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-app1
+  labels:
+    name: laravel-app1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: laravel-app1
+  template:
+    metadata:
+      name: laravel-app1
+      labels:
+        app: laravel-app1
+    spec:
+      containers:
+        - name: laravel-app1
+          image: akib123/laravel-app1:v1.0
+          imagePullPolicy: Always
+      nodeSelector:
+          app: app1
+     
