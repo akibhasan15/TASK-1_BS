@@ -41,7 +41,7 @@
 >>
 >>> Scope: Global
 >>
->>> Secret: UserName@Kuberntes-Server-IP (For Instance, myusername@10.10.10.10)
+>>> Secret: UserName@Kubernetes-Server-IP (For Instance, myusername@10.10.10.10)
 >>
 >>> ID: USER@KubeServer
 >>
